@@ -1,14 +1,35 @@
-apiVersion:  v1
+apiVersion: v1
 kind: ConfigMap
-metadata: 
+metadata:
   name: {{ template "echo-server.fullname" . }}
-data: 
-    PORT: {{ .Values.service.port  | quote }}
-    LOGS__IGNORE__PING: {{ .Values.application.logs.ignore.ping  | quote }}
-    ENABLE__HOST: {{ .Values.application.enable.host  | quote }}
-    ENABLE__HTTP: {{ .Values.application.enable.http  | quote }}
-    ENABLE__REQUEST: {{ .Values.application.enable.request  | quote }}
-    ENABLE__COOKIES: {{ .Values.application.enable.cookies  | quote }}
-    ENABLE__ENVIRONMENT: {{ .Values.application.enable.environment  | quote }}
-    ENABLE__FILE: {{ .Values.application.enable.file  | quote }}
-    ENABLE__HEADER: {{ .Values.application.enable.header  | quote }}
+data:
+  PORT: {{ .Values.service.port | quote }}
+  LOGS__IGNORE__PING: {{ .Values.application.logs.ignore.ping | quote }}
+  ENABLE__HOST: {{ .Values.application.enable.host | quote }}
+  ENABLE__HTTP: {{ .Values.application.enable.http | quote }}
+  ENABLE__REQUEST: {{ .Values.application.enable.request | quote }}
+  ENABLE__COOKIES: {{ .Values.application.enable.cookies | quote }}
+  ENABLE__HEADER: {{ .Values.application.enable.header | quote }}
+  ENABLE__ENVIRONMENT: {{ .Values.application.enable.environment | quote }}
+  ENABLE__FILE: {{ .Values.application.enable.file | quote }}
+  CONTROLS__TIMES__MIN: {{ .Values.application.controls.times.min | quote }}
+  CONTROLS__TIMES__MAX: {{ .Values.application.controls.times.max | quote }}
+  COMMANDS__HTTPBODY__QUERY: {{ .Values.application.commands.httpbody.query | quote }}
+  COMMANDS__HTTPBODY__HEADER: {{ .Values.application.commands.httpbody.header | quote }}
+  COMMANDS__HTTPENVBODY__QUERY: {{ .Values.application.commands.httpenvbody.query | quote }}
+  COMMANDS__HTTPENVBODY__HEADER: {{ .Values.application.commands.httpenvbody.header | quote }}
+  COMMANDS__HTTPCODE__QUERY: {{ .Values.application.commands.httpcode.query | quote }}
+  COMMANDS__HTTPCODE__HEADER: {{ .Values.application.commands.httpcode.header | quote }}
+  COMMANDS__HTTPHEADERS__QUERY: {{ .Values.application.commands.httpheaders.query | quote }}
+  COMMANDS__HTTPHEADERS__HEADER: {{ .Values.application.commands.httpheaders.header | quote }}
+  COMMANDS__TIME__QUERY: {{ .Values.application.commands.time.query | quote }}
+  COMMANDS__TIME__HEADER: {{ .Values.application.commands.time.header | quote }}
+  COMMANDS__FILE__QUERY: {{ .Values.application.commands.file.query | quote }}
+  COMMANDS__FILE__HEADER: {{ .Values.application.commands.file.header | quote }}
+  LOGS__APP: {{ .Values.application.logs.app | quote }}
+  LOGS__LEVEL: {{ .Values.application.logs.level | quote }}
+  LOGS__FORMAT: {{ .Values.application.logs.format | quote }}
+  LOGS__SEQ__ENABLED: {{ .Values.application.logs.seq.enabled | quote }}
+  LOGS__SEQ__SERVER: {{ .Values.application.logs.seq.server | quote }}
+  LOGS__SEQ__KEY: {{ .Values.application.logs.seq.key | quote }}
+  LOGS__SEQ__LEVEL: {{ .Values.application.logs.seq.level | quote }}

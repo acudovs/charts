@@ -1,3 +1,4 @@
+{{- if .Values.testConnection -}}
 apiVersion: v1
 kind: Pod
 metadata:
@@ -11,5 +12,6 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args:  ['{{ include "echo-server.fullname" . }}:{{ .Values.service.port }}']
+      args: ['{{ include "echo-server.fullname" . }}:{{ .Values.service.port }}']
   restartPolicy: Never
+{{- end }}

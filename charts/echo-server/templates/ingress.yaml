@@ -34,8 +34,12 @@ spec:
   rules:
   {{- if semverCompare ">=1.19-0" .Capabilities.KubeVersion.GitVersion -}}
   {{- range .Values.ingress.hosts }}
+    {{- if .host }}
     - host: {{ .host | quote }}
       http:
+    {{- else }}
+    - http:
+    {{- end }}
         paths:
         {{- range .paths }}
           - path: {{ . }}

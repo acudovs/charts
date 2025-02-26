@@ -5,7 +5,7 @@ image:
   # image.repository -- https://hub.docker.com/r/ealen/echo-server
   repository: ealen/echo-server
   # image.tag -- https://github.com/Ealenn/Echo-Server/releases
-  tag: 0.6.0
+  tag: 0.9.2
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -24,6 +24,8 @@ service:
   type: ClusterIP
   # service.port -- For k8s >= 1.19 use port number not name
   port: 80
+
+testConnection: true
 
 ingress:
   # ingress.enabled -- Enable ingress
@@ -56,8 +58,8 @@ livenessProbe:
   httpGet:
     path: /ping
     httpHeaders:
-    - name: x-echo-code
-      value: "200"
+      - name: x-echo-code
+        value: "200"
   initialDelaySeconds: 5
   periodSeconds: 10
   timeoutSeconds: 2
@@ -69,6 +71,21 @@ application:
     ignore:
       # application.logs.ignore.ping -- Don't log ping request on route `/ping`
       ping: false
+    # application.logs.app -- Application name
+    app: echo-server
+    # application.logs.level -- Log level
+    level: debug
+    # application.logs.format -- Log format
+    format: default
+    seq:
+      # application.logs.seq.enabled -- Enable Seq logging
+      enabled: false
+      # application.logs.seq.server -- Seq server
+      server: ""
+      # application.logs.seq.key -- Seq API key
+      key: ""
+      # application.logs.seq.level -- Seq log level
+      level: info
   enable:
     # application.enable.host -- Enable host in response
     host: true
@@ -84,3 +101,40 @@ application:
     file: true
     # application.enable.header -- Enable custom header in response
     header: true
+  controls:
+    times:
+      # application.controls.times.min -- Minimum response time
+      min: 0
+      # application.controls.times.max -- Maximum response time
+      max: 60000
+  commands:
+    httpbody:
+      # application.commands.httpbody.query -- Query string to return in response
+      query: echo_body
+      # application.commands.httpbody.header -- Header to return in response
+      header: x-echo-body
+    httpenvbody:
+      # application.commands.httpenvbody.query -- Query string to return in response
+      query: echo_env_body
+      # application.commands.httpenvbody.header -- Header to return in response
+      header: x-echo-env-body
+    httpcode:
+      # application.commands.httpcode.query -- Query string to return in response
+      query: echo_code
+      # application.commands.httpcode.header -- Header to return in response
+      header: x-echo-code
+    httpheaders:
+      # application.commands.httpheaders.query -- Query string to return in response
+      query: echo_header
+      # application.commands.httpheaders.header -- Header to return in response
+      header: x-echo-header
+    time:
+      # application.commands.time.query -- Query string to return in response
+      query: echo_time
+      # application.commands.time.header -- Header to return in response
+      header: x-echo-time
+    file:
+      # application.commands.file.query -- Query string to return in response
+      query: echo_file
+      # application.commands.file.header -- Header to return in response
+      header: x-echo-file

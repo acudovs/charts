@@ -31,6 +31,20 @@ helm upgrade -i ${name} ealenn/echo-server --namespace ${namespace} --force
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` |  |
+| application.commands.file.header | string | `"x-echo-file"` | Header to return in response |
+| application.commands.file.query | string | `"echo_file"` | Query string to return in response |
+| application.commands.httpbody.header | string | `"x-echo-body"` | Header to return in response |
+| application.commands.httpbody.query | string | `"echo_body"` | Query string to return in response |
+| application.commands.httpcode.header | string | `"x-echo-code"` | Header to return in response |
+| application.commands.httpcode.query | string | `"echo_code"` | Query string to return in response |
+| application.commands.httpenvbody.header | string | `"x-echo-env-body"` | Header to return in response |
+| application.commands.httpenvbody.query | string | `"echo_env_body"` | Query string to return in response |
+| application.commands.httpheaders.header | string | `"x-echo-header"` | Header to return in response |
+| application.commands.httpheaders.query | string | `"echo_header"` | Query string to return in response |
+| application.commands.time.header | string | `"x-echo-time"` | Header to return in response |
+| application.commands.time.query | string | `"echo_time"` | Query string to return in response |
+| application.controls.times.max | int | `60000` | Maximum response time |
+| application.controls.times.min | int | `0` | Minimum response time |
 | application.enable.cookies | bool | `true` | Enable cookies in response |
 | application.enable.environment | bool | `true` | Enable environment in response |
 | application.enable.file | bool | `true` | Enable file in response |
@@ -38,11 +52,18 @@ helm upgrade -i ${name} ealenn/echo-server --namespace ${namespace} --force
 | application.enable.host | bool | `true` | Enable host in response |
 | application.enable.http | bool | `true` | Enable http in response |
 | application.enable.request | bool | `true` | Enable request in response |
+| application.logs.app | string | `"echo-server"` | Application name |
+| application.logs.format | string | `"default"` | Log format |
 | application.logs.ignore.ping | bool | `false` | Don't log ping request on route `/ping` |
+| application.logs.level | string | `"debug"` | Log level |
+| application.logs.seq.enabled | bool | `false` | Enable Seq logging |
+| application.logs.seq.key | string | `""` | Seq API key |
+| application.logs.seq.level | string | `"info"` | Seq log level |
+| application.logs.seq.server | string | `""` | Seq server |
 | fullnameOverride | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"ealen/echo-server"` | https://hub.docker.com/r/ealen/echo-server |
-| image.tag | string | `"0.6.0"` | https://github.com/Ealenn/Echo-Server/releases |
+| image.tag | string | `"0.9.2"` | https://github.com/Ealenn/Echo-Server/releases |
 | imagePullSecrets | list | `[]` |  |
 | ingress.annotations | object | `{}` | Example `kubernetes.io/ingress.class: nginx` for Nginx Ingress |
 | ingress.enabled | bool | `false` | Enable ingress |
@@ -71,9 +92,14 @@ helm upgrade -i ${name} ealenn/echo-server --namespace ${namespace} --force
 | service.type | string | `"ClusterIP"` |  |
 | serviceAccount.create | bool | `true` |  |
 | serviceAccount.name | string | `""` |  |
+| testConnection | bool | `true` |  |
 | tolerations | list | `[]` |  |
 
 ## Changelog
+
+### 0.6.0
+
+- Update echo to 0.9.2
 
 ### 0.5.0
 
